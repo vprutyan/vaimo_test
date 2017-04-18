@@ -1,0 +1,32 @@
+<?php $collection = $this->getCollection(); ?>
+
+<?php if($collection->getSize()): ?>
+<table id="allocated-orders-table">
+    <thead>
+        
+    </thead>
+    <tbody>
+        <?php $_odd = ''; ?>
+        <?php foreach ($collection as $order): ?>
+            <tr>
+                <?php $orderId =  $order->getEntityId(); ?>
+                <td><a target="_blank" href="<?php echo Mage::helper('adminhtml')->getUrl("adminhtml/sales_order/view", array('order_id'=>$orderId)) ?>">
+					<span>
+						<?php echo $order->getIncrementId(); ?>
+					</span></a>
+				</td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+<script type="text/javascript">decorateTable('allocated-orders-table');</script>
+<?php echo $this->getPagerHtml(); ?>
+<?php else: ?>
+    <p><?php echo $this->__('The order collection is empty.'); ?></p>
+<?php endif ?>
+
+<style>
+	.global-site-notice{
+		display:none;
+	}	
+</style>
